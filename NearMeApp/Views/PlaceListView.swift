@@ -3,6 +3,7 @@ import MapKit
 
 struct PlaceListView: View {
     let mapItems: [MKMapItem]
+    @Binding var selectedMapItem: MKMapItem?
     private var sortedItems: [MKMapItem] {
         guard let userLocation = LocationManager.shared.manager.location else {
             return mapItems
@@ -26,11 +27,8 @@ struct PlaceListView: View {
     }
     
     var body: some View {
-        List(mapItems,id:\.self){
+        List(mapItems,id:\.self,selection:$selectedMapItem){
             mapItem in PlaceView(mapItem: mapItem)
         }
     }
-}
-#Preview {
-    PlaceListView(mapItems: [PreviewData.apple])
 }
