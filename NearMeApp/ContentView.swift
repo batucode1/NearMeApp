@@ -40,8 +40,6 @@ struct ContentView: View {
             let startingMapItem = MKMapItem(
                 placemark: MKPlacemark(
                     coordinate: currentUserLocation.coordinate))
-            
-            
             self.route = await calculateDirections(
                 from: startingMapItem,
                 to: selectedMapItem
@@ -72,6 +70,7 @@ struct ContentView: View {
                     switch displayMode {
                     case .list:
                         SearchBarView(search: $query, isSearching: $isSearching)
+                            .padding(.top,30)
                         PlaceListView(
                             mapItems: mapItems,
                             selectedMapItem: $selectedMapItem
@@ -79,7 +78,14 @@ struct ContentView: View {
                     case .detail:
                         SelectedPlaceDetailView(mapItem: $selectedMapItem)
                             .padding()
+                        if selectedDetent == .medium || selectedDetent == .large {
+                            if let selectedMapItem {
+                                ActionButtons(mapItem: selectedMapItem)
+                                    .padding()
+                            }
+                        }
                         LookAroundPreview(initialScene: lookAroundScene)
+        
                     }
                     Spacer()
                     
@@ -93,8 +99,8 @@ struct ContentView: View {
                 .presentationBackgroundInteraction(
                     .enabled(upThrough: .medium)
                 )
-                
-            })
+            }
+        )
         .onChange(of: selectedMapItem,{
             if selectedMapItem != nil {
                 displayMode = .detail

@@ -1,6 +1,14 @@
 import Foundation
 import MapKit
 
+func makeCall(phone: String) {
+    if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url)
+    }
+    else {
+        print("Device can't make phone calls")
+    }
+}
 func calculateDirections(from: MKMapItem, to: MKMapItem) async -> MKRoute? {
     let directionsRequest = MKDirections.Request()
     directionsRequest.transportType = .automobile

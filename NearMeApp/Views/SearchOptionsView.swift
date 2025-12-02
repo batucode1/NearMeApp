@@ -5,7 +5,9 @@ struct SearchOptionsView: View {
         "Restaurants": "fork.knife",
         "Hotels": "bed.double.fill",
         "Coffe": "cup.and.saucer.fill",
-        "Gas":"fuelpump.fill"]
+        "Gas":"fuelpump.fill",
+        "School": "graduationcap.fill"
+    ]
     
     let onSelected: (String) -> Void
     
@@ -35,4 +37,3 @@ struct SearchOptionsView: View {
         }
     }
 }
-
